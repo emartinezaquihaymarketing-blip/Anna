@@ -1,0 +1,447 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ffeef8 0%, #ffe0f0 25%, #ffd1e8 50%, #ffb3d9 75%, #ff9dd1 100%);
+    position: relative;
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.main-content {
+    text-align: center;
+    z-index: 10;
+    position: relative;
+    max-width: 800px;
+    padding: 2rem;
+}
+
+/* Título principal */
+.title {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+}
+
+.title-line {
+    display: block;
+    animation: slideInUp 1s ease-out;
+}
+
+.title-line:first-child {
+    color: #d63384;
+    animation-delay: 0.2s;
+    animation-fill-mode: both;
+}
+
+.title-line.highlight {
+    background: linear-gradient(45deg, #ff69b4, #ff1493, #dc143c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation-delay: 0.4s;
+    animation-fill-mode: both;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    color: #8e44ad;
+    margin-bottom: 3rem;
+    font-weight: 400;
+    animation: fadeIn 1s ease-out 0.6s both;
+}
+
+/* Sección central */
+.center-section {
+    margin: 3rem 0;
+}
+
+/* Ilustración del cochecito */
+.baby-illustration {
+    margin-bottom: 3rem;
+    animation: bounceIn 1.2s ease-out 0.8s both;
+}
+
+.baby-carriage {
+    position: relative;
+    width: 200px;
+    height: 120px;
+    margin: 0 auto;
+    animation: float 3s ease-in-out infinite;
+}
+
+.carriage-body {
+    width: 120px;
+    height: 80px;
+    background: linear-gradient(145deg, #ff69b4, #ff1493);
+    border-radius: 20px 20px 15px 15px;
+    position: absolute;
+    top: 20px;
+    left: 40px;
+    box-shadow: 0 10px 30px rgba(255, 20, 147, 0.3);
+    border: 3px solid #fff;
+}
+
+.carriage-body::before {
+    content: '👶';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    animation: wiggle 2s ease-in-out infinite;
+}
+
+.carriage-handle {
+    width: 60px;
+    height: 60px;
+    border: 4px solid #d63384;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-bottom: none;
+    border-right: none;
+    transform: rotate(-45deg);
+}
+
+.wheel {
+    width: 30px;
+    height: 30px;
+    background: #8e44ad;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    border: 3px solid #fff;
+    animation: spin 4s linear infinite;
+}
+
+.wheel-1 {
+    left: 50px;
+}
+
+.wheel-2 {
+    right: 50px;
+}
+
+/* Botón principal */
+.cta-button {
+    background: linear-gradient(45deg, #ff69b4, #ff1493, #dc143c);
+    border: none;
+    padding: 20px 40px;
+    border-radius: 50px;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(255, 20, 147, 0.4);
+    transition: all 0.3s ease;
+    animation: pulse 2s ease-in-out infinite;
+    min-width: 350px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.cta-button:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 20px 45px rgba(255, 20, 147, 0.6);
+    animation: none;
+}
+
+.cta-button:active {
+    transform: translateY(-2px) scale(1.02);
+}
+
+.button-text {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.button-icon {
+    display: inline-block;
+    font-size: 2rem;
+    animation: bounce 1.5s ease-in-out infinite;
+}
+
+.button-sparkles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.sparkle {
+    position: absolute;
+    color: #fff;
+    font-size: 1rem;
+    animation: sparkle 2s ease-in-out infinite;
+}
+
+.sparkle:nth-child(1) {
+    top: 20%;
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.sparkle:nth-child(2) {
+    top: 30%;
+    right: 25%;
+    animation-delay: 0.7s;
+}
+
+.sparkle:nth-child(3) {
+    bottom: 25%;
+    left: 30%;
+    animation-delay: 1.4s;
+}
+
+/* Mensaje final */
+.footer {
+    margin-top: 2rem;
+    animation: fadeIn 1s ease-out 1s both;
+}
+
+.message {
+    font-size: 1.2rem;
+    color: #8e44ad;
+    font-weight: 400;
+}
+
+/* Elementos flotantes */
+.floating-elements {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.element {
+    position: absolute;
+    font-size: 2rem;
+    animation: float 4s ease-in-out infinite;
+    opacity: 0.7;
+}
+
+.element:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+.element:nth-child(2) { top: 20%; right: 15%; animation-delay: 1s; }
+.element:nth-child(3) { top: 60%; left: 5%; animation-delay: 2s; }
+.element:nth-child(4) { top: 70%; right: 10%; animation-delay: 3s; }
+.element:nth-child(5) { top: 30%; left: 80%; animation-delay: 0.5s; }
+.element:nth-child(6) { top: 80%; left: 20%; animation-delay: 1.5s; }
+.element:nth-child(7) { top: 15%; left: 60%; animation-delay: 2.5s; }
+.element:nth-child(8) { top: 85%; right: 25%; animation-delay: 3.5s; }
+
+/* Partículas de fondo */
+.particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 105, 180, 0.6);
+    border-radius: 50%;
+    animation: particleFloat 8s linear infinite;
+}
+
+.particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+.particle:nth-child(2) { left: 20%; animation-delay: 1s; }
+.particle:nth-child(3) { left: 30%; animation-delay: 2s; }
+.particle:nth-child(4) { left: 40%; animation-delay: 3s; }
+.particle:nth-child(5) { left: 60%; animation-delay: 4s; }
+.particle:nth-child(6) { left: 70%; animation-delay: 5s; }
+.particle:nth-child(7) { left: 80%; animation-delay: 6s; }
+.particle:nth-child(8) { left: 90%; animation-delay: 7s; }
+
+/* Animaciones */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3) translateY(-100px);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1) translateY(0);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 15px 35px rgba(255, 20, 147, 0.4);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 20px 45px rgba(255, 20, 147, 0.6);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes sparkle {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes wiggle {
+    0%, 100% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    25% {
+        transform: translate(-50%, -50%) rotate(-5deg);
+    }
+    75% {
+        transform: translate(-50%, -50%) rotate(5deg);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.5rem;
+    }
+    
+    .subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .cta-button {
+        font-size: 1.4rem;
+        padding: 15px 30px;
+        min-width: 280px;
+    }
+    
+    .baby-carriage {
+        width: 150px;
+        height: 90px;
+    }
+    
+    .carriage-body {
+        width: 90px;
+        height: 60px;
+    }
+    
+    .element {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 1rem;
+    }
+    
+    .title {
+        font-size: 2rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    .cta-button {
+        font-size: 1.2rem;
+        padding: 12px 25px;
+        min-width: 250px;
+    }
+}
