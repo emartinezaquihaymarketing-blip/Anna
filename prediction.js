@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const percentage = Math.round((voteCounts[date] / totalVotes) * 100);
                 const percentageEl = document.createElement('span');
                 percentageEl.className = 'vote-percentage';
-                percentageEl.textContent = `${percentage}%%`;
+                percentageEl.textContent = `${percentage}%`;
                 dayEl.appendChild(percentageEl);
             }
         });
