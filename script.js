@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Configuración del botón principal
     wishlistBtn.addEventListener('click', function() {
         // Aquí puedes cambiar la URL por la de tu lista de deseos real
-        const wishlistUrl = 'https://www.amazon.es/baby-reg/homepage'; // Cambia esta URL
+        const wishlistUrl = 'https://www.hellobb.net/guest/W5rk'; // Cambia esta URL
         
         // Efecto de click con animación
         this.style.transform = 'scale(0.95)';
