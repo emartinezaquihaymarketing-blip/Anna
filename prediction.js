@@ -87,10 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         const message = document.getElementById('user-message').value;
 
-        if (GOOGLE_FORM_URL === 'https://docs.google.com/forms/d/e/1FAIpQLSe5h25P2sxBjEiIytsnApheOfXTpYc4j7njHSI0PfWf3JZvkQ/viewform?') {
-            alert('Por favor, configura la URL de tu Google Form en el archivo prediction.js');
-            return;
-        }
+        
 
         // --- IMPORTANTE: Mapeo de los campos del formulario ---
         // Asegúrate de que los nombres de los campos ('entry.XXXXX') coinciden con los de tu Google Form.
