@@ -609,7 +609,7 @@ body {
     font-weight: 600;
 }
 
-#prediction-form textarea {
+#prediction-form textarea, #prediction-form input[type="text"] {
     width: 100%;
     padding: 0.8rem;
     border-radius: 8px;
@@ -641,4 +641,21 @@ body {
     color: #d63384;
     font-size: 1.2rem;
     font-weight: 600;
+}
+
+/* Estilos para porcentajes de votos */
+.calendar-day {
+    position: relative; /* Necesario para posicionar el porcentaje */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.vote-percentage {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #d63384;
+    position: absolute;
+    bottom: 2px;
 }
