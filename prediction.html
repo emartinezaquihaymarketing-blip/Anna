@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predice la llegada de Anna</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="main-content">
+            <h1 class="title">
+                <span class="title-line">Elige una</span>
+                <span class="title-line highlight">fecha</span>
+            </h1>
+            <p class="subtitle">Selecciona el día que crees que llegará nuestra princesa</p>
+
+            <div class="calendars-container">
+                <div class="calendar-wrapper">
+                    <h2 class="calendar-title">Noviembre 2025</h2>
+                    <div id="november-calendar" class="calendar-grid"></div>
+                </div>
+                <div class="calendar-wrapper">
+                    <h2 class="calendar-title">Diciembre 2025</h2>
+                    <div id="december-calendar" class="calendar-grid"></div>
+                </div>
+            </div>
+             <a href="index.html" class="back-button">Volver</a>
+        </div>
+    </div>
+
+    <!-- Modal para el mensaje -->
+    <div id="message-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <button class="modal-close-btn">&times;</button>
+            <h3 class="modal-title">¡Casi listo!</h3>
+            <p>Has seleccionado el <strong id="selected-date-text"></strong>.</p>
+            <form id="prediction-form">
+                <label for="user-message">Deja tu mensaje para Anna:</label>
+                <textarea id="user-message" name="message" rows="4" placeholder="Escribe aquí tu dedicatoria..."></textarea>
+                <button type="submit" class="modal-submit-btn">Enviar mi predicción</button>
+            </form>
+            <div id="form-success-message" style="display: none;">
+                <p>¡Gracias! Tu mensaje ha sido enviado. 💕</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="prediction.js"></script>
+</body>
+</html>
