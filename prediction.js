@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 selectedDateText.textContent = selectedDate;
                 predictionForm.style.display = 'block';
                 successMessage.style.display = 'none';
+                document.getElementById('user-name').value = '';
                 document.getElementById('user-message').value = '';
                 modal.style.display = 'flex';
             });
@@ -85,17 +86,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // Enviar el formulario
     predictionForm.addEventListener('submit', (e) => {
         e.preventDefault();
+        const name = document.getElementById('user-name').value.trim();
         const message = document.getElementById('user-message').value;
 
-        
+        if (name === '') {
+            alert('Por favor, dinos tu nombre.');
+            return;
+        }
 
         // --- IMPORTANTE: Mapeo de los campos del formulario ---
         // Asegúrate de que los nombres de los campos ('entry.XXXXX') coinciden con los de tu Google Form.
         // Para encontrarlos: ve a tu formulario > obtén el enlace pre-rellenado > rellena los campos y obtén el enlace.
         // Los 'entry.XXXXX' estarán en la URL generada.
         const formData = new FormData();
-                formData.append('entry.2011703115', selectedDate); // Reemplaza XXXXXXX con el ID de tu campo 'Fecha'
-                formData.append('entry.451574532', message);    // Reemplaza YYYYYYY con el ID de tu campo 'Mensaje'    // Reemplaza YYYYYYY con el ID de tu campo 'Mensaje'
+        formData.append('entry.987818306', name);
+        formData.append('entry.2011703115', selectedDate);
+        formData.append('entry.451574532', message);
 
         // Envío de datos en segundo plano
         fetch(GOOGLE_FORM_URL.replace('/viewform', '/formResponse'), {
