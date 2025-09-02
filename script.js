@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const priceAckCheckbox = document.getElementById('price-ack-checkbox');
     const modalAcceptBtn = document.getElementById('modal-accept-btn');
 
-    const wishlistUrl = 'https://www.amazon.es/baby-reg/homepage'; // URL de la lista de deseos
+    const wishlistUrl = 'https://www.hellobb.net/guest/W5rk'; // URL de la lista de deseos
 
     // --- LÓGICA DEL MODAL DE AVISO ---
 
