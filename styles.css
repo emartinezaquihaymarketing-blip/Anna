@@ -643,19 +643,16 @@ body {
     font-weight: 600;
 }
 
-/* Estilos para porcentajes de votos */
+/* Estilos para el llenado de votos */
 .calendar-day {
-    position: relative; /* Necesario para posicionar el porcentaje */
+    position: relative;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-clip: padding-box; /* Asegura que el fondo no se salga del borde */
 }
 
-.vote-percentage {
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: #d63384;
-    position: absolute;
-    bottom: 2px;
+.day-number {
+    position: relative; /* Para que el número esté por encima del fondo */
+    z-index: 2;
 }

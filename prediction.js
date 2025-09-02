@@ -71,19 +71,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * Muestra los porcentajes de votos en el calendario.
+     * Muestra los votos visualmente en el calendario.
      */
-    function displayPercentages(voteCounts, totalVotes) {
+    function displayVoteVisuals(voteCounts, totalVotes) {
         if (totalVotes === 0) return;
 
         document.querySelectorAll('.calendar-day[data-date]').forEach(dayEl => {
             const date = dayEl.dataset.date;
             if (voteCounts[date]) {
                 const percentage = Math.round((voteCounts[date] / totalVotes) * 100);
-                const percentageEl = document.createElement('span');
-                percentageEl.className = 'vote-percentage';
-                percentageEl.textContent = `${percentage}%`;
-                dayEl.appendChild(percentageEl);
+                // Aplicar el estilo de fondo para el efecto de llenado
+                dayEl.style.background = `linear-gradient(to top, #ffc0d9 ${percentage}%, #fff ${percentage}%)`;
             }
         });
     }
@@ -99,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             const csvText = await response.text();
             const { voteCounts, totalVotes } = processVoteData(csvText);
-            displayPercentages(voteCounts, totalVotes);
+            displayVoteVisuals(voteCounts, totalVotes);
         } catch (error) {
             console.error('Fallo al obtener los votos:', error);
         }
