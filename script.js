@@ -1,32 +1,48 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // --- ELEMENTOS PRINCIPALES ---
     const wishlistBtn = document.getElementById('wishlistBtn');
-    const floatingElements = document.querySelectorAll('.element');
-    const particles = document.querySelectorAll('.particle');
+    
+    // --- ELEMENTOS DEL MODAL DE AVISO ---
+    const wishlistModal = document.getElementById('wishlist-modal');
+    const priceAckCheckbox = document.getElementById('price-ack-checkbox');
+    const modalAcceptBtn = document.getElementById('modal-accept-btn');
 
-    // Configuración del botón principal
+    const wishlistUrl = 'https://www.amazon.es/baby-reg/homepage'; // URL de la lista de deseos
+
+    // --- LÓGICA DEL MODAL DE AVISO ---
+
+    // 1. Abrir el modal al hacer clic en el botón de la lista de deseos
     wishlistBtn.addEventListener('click', function() {
-        // Aquí puedes cambiar la URL por la de tu lista de deseos real
-        const wishlistUrl = 'https://www.hellobb.net/guest/W5rk'; // Cambia esta URL
-        
-        // Efecto de click con animación
-        this.style.transform = 'scale(0.95)';
-        this.style.boxShadow = '0 10px 25px rgba(255, 20, 147, 0.8)';
-        
-        setTimeout(() => {
-            this.style.transform = '';
-            this.style.boxShadow = '';
-        }, 150);
+        wishlistModal.style.display = 'flex';
+    });
 
-        // Crear efecto de confeti
+    // 2. Activar/desactivar el botón de Aceptar según el estado del checkbox
+    priceAckCheckbox.addEventListener('change', function() {
+        modalAcceptBtn.disabled = !this.checked;
+    });
+
+    // 3. Cerrar modal y redirigir al hacer clic en Aceptar
+    modalAcceptBtn.addEventListener('click', function() {
+        if (!priceAckCheckbox.checked) return; // Doble seguridad
+
+        // Ocultar el modal
+        wishlistModal.style.display = 'none';
+
+        // Efecto de confeti (opcional, mantenido del código original)
         createConfetti();
         
-        // Redirigir después de un breve delay para mostrar la animación
+        // Redirigir a la lista de deseos después de un breve delay
         setTimeout(() => {
             window.open(wishlistUrl, '_blank');
         }, 300);
     });
 
-    // Efecto hover mejorado para el botón
+
+    // --- OTRAS ANIMACIONES Y EFECTOS (código original) ---
+
+    const floatingElements = document.querySelectorAll('.element');
+
+    // Efecto hover mejorado para el botón principal
     wishlistBtn.addEventListener('mouseenter', function() {
         this.style.background = 'linear-gradient(45deg, #ff1493, #dc143c, #b91372)';
         createSparkles(this);
@@ -56,7 +72,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             document.body.appendChild(confetti);
 
-            // Remove confetti después de la animación
             setTimeout(() => {
                 if (confetti.parentNode) {
                     confetti.parentNode.removeChild(confetti);
@@ -91,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Animación de elementos flotantes al hacer hover
+    // Animación de elementos flotantes
     floatingElements.forEach(element => {
         element.addEventListener('mouseenter', function() {
             this.style.transform = 'scale(1.3) rotate(15deg)';
@@ -103,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Efecto parallax suave en elementos flotantes
+    // Efecto parallax suave
     document.addEventListener('mousemove', function(e) {
         const mouseX = e.clientX / window.innerWidth;
         const mouseY = e.clientY / window.innerHeight;
@@ -117,14 +132,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Animación de entrada escalonada para elementos
+    // Animación de entrada
     function animateOnLoad() {
         const elements = document.querySelectorAll('.title-line, .subtitle, .baby-illustration, .cta-button, .message');
-        
         elements.forEach((element, index) => {
             element.style.opacity = '0';
             element.style.transform = 'translateY(30px)';
-            
             setTimeout(() => {
                 element.style.transition = 'all 0.6s ease-out';
                 element.style.opacity = '1';
@@ -132,23 +145,18 @@ document.addEventListener('DOMContentLoaded', function() {
             }, index * 200);
         });
     }
-
-    // Ejecutar animación de carga
     setTimeout(animateOnLoad, 100);
 
-    // Crear más partículas dinámicamente
+    // Partículas dinámicas
     function createDynamicParticles() {
         const particleContainer = document.querySelector('.particles');
-        
         setInterval(() => {
             const particle = document.createElement('div');
             particle.className = 'particle';
             particle.style.left = Math.random() * 100 + '%';
             particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
             particle.style.opacity = Math.random() * 0.6 + 0.2;
-            
             particleContainer.appendChild(particle);
-            
             setTimeout(() => {
                 if (particle.parentNode) {
                     particle.parentNode.removeChild(particle);
@@ -156,8 +164,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 8000);
         }, 2000);
     }
-
-    // Iniciar creación de partículas dinámicas
     createDynamicParticles();
 
     // Efecto de respiración en el cochecito
@@ -170,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 4000);
 });
 
-// CSS adicional para animaciones creadas dinámicamente
+// CSS adicional para animaciones JS
 const style = document.createElement('style');
 style.textContent = `
     @keyframes confettiFall {
@@ -179,29 +185,12 @@ style.textContent = `
             opacity: 0;
         }
     }
-    
     @keyframes sparkleEffect {
-        0% {
-            opacity: 1;
-            transform: scale(0) rotate(0deg);
-        }
-        50% {
-            opacity: 1;
-            transform: scale(1) rotate(180deg);
-        }
-        100% {
-            opacity: 0;
-            transform: scale(0) rotate(360deg);
-        }
+        0% { opacity: 1; transform: scale(0) rotate(0deg); }
+        50% { opacity: 1; transform: scale(1) rotate(180deg); }
+        100% { opacity: 0; transform: scale(0) rotate(360deg); }
     }
-    
-    .baby-carriage {
-        transition: transform 0.5s ease-in-out;
-    }
-    
-    .element {
-        transition: transform 0.1s ease-out;
-        cursor: pointer;
-    }
+    .baby-carriage { transition: transform 0.5s ease-in-out; }
+    .element { transition: transform 0.1s ease-out; cursor: pointer; }
 `;
 document.head.appendChild(style);
