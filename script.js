@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             document.body.appendChild(confetti);
 
-            // Remover confetti después de la animación
+            // Remove confetti después de la animación
             setTimeout(() => {
                 if (confetti.parentNode) {
                     confetti.parentNode.removeChild(confetti);
