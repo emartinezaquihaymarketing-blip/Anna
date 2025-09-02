@@ -690,3 +690,20 @@ body {
     box-shadow: none;
     transform: none;
 }
+
+/* Estilos para la lista en el modal */
+ul.modal-text {
+    text-align: left;
+    padding-left: 25px;
+    margin: 1rem 0;
+    color: #555;
+    line-height: 1.6;
+}
+
+ul.modal-text li {
+    margin-bottom: 0.8rem;
+}
+
+ul.modal-text li::marker {
+    color: #d63384;
+}
