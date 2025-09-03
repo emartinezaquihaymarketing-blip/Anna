@@ -397,18 +397,34 @@ body {
 
 /* Responsive */
 @media (max-width: 768px) {
+    body {
+        height: auto;
+        overflow: auto; /* Permite scroll */
+    }
+
+    .container {
+        height: auto;
+        min-height: 100vh; /* Ocupa al menos toda la pantalla */
+        padding: 4rem 0;
+    }
+
     .title {
-        font-size: 2.5rem;
+        font-size: 2.8rem;
     }
     
     .subtitle {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+    }
+
+    .center-section {
+        margin: 2rem 0;
     }
     
     .cta-button {
-        font-size: 1.4rem;
-        padding: 15px 30px;
-        min-width: 280px;
+        font-size: 1.5rem;
+        padding: 18px 35px;
+        min-width: 300px;
     }
     
     .baby-carriage {
@@ -424,25 +440,51 @@ body {
     .element {
         font-size: 1.5rem;
     }
+
+    .prediction-section {
+        margin-top: 2rem;
+        padding-bottom: 2rem; /* Espacio extra al final para que no quede pegado */
+    }
 }
 
 @media (max-width: 480px) {
+    .container {
+        padding: 2rem 0;
+    }
+
     .main-content {
-        padding: 1rem;
+        padding: 0.5rem;
     }
     
     .title {
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
     
     .subtitle {
-        font-size: 1rem;
+        font-size: 1.1rem;
+    }
+
+    .baby-illustration {
+        margin-bottom: 2rem;
     }
     
     .cta-button {
         font-size: 1.2rem;
-        padding: 12px 25px;
-        min-width: 250px;
+        padding: 15px 30px;
+        min-width: 260px;
+    }
+
+    .prediction-section {
+        margin-top: 1.5rem;
+    }
+
+    .prediction-text {
+        font-size: 1rem;
+    }
+
+    .prediction-button {
+        padding: 6px 16px;
+        font-size: 0.9rem;
     }
 }
 
