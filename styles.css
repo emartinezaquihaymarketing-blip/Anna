@@ -749,3 +749,134 @@ ul.modal-text li {
 ul.modal-text li::marker {
     color: #d63384;
 }
+
+/* --- ESTILOS PARA EL BEBÉ INTERACTIVO --- */
+
+#interactive-baby {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 990; /* Debajo de los modales (1000) pero encima de otros elementos */
+    cursor: grab;
+    user-select: none; /* Evita seleccionar texto al arrastrar */
+}
+
+#interactive-baby.dragging {
+    cursor: grabbing;
+}
+
+.baby-container {
+    position: relative;
+}
+
+.speech-bubble {
+    position: absolute;
+    bottom: 130px; /* Encima de la cabeza del bebé */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    color: #333;
+    padding: 10px 15px;
+    border-radius: 15px;
+    width: 200px;
+    font-size: 0.9rem;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#interactive-baby:hover .speech-bubble {
+    opacity: 1;
+}
+
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 10px 10px 0;
+    border-style: solid;
+    border-color: #fff transparent transparent transparent;
+}
+
+.baby-head {
+    width: 80px;
+    height: 75px;
+    background: #fde3d8; /* Tono de piel */
+    border-radius: 50%;
+    position: relative;
+    border: 2px solid #e5c8b9;
+}
+
+.baby-hair {
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 15px;
+    border-top: 10px solid #6b4423;
+    border-radius: 50% 50% 0 0;
+}
+
+.baby-eye {
+    width: 8px;
+    height: 8px;
+    background: #333;
+    border-radius: 50%;
+    position: absolute;
+    top: 35px;
+    transition: all 0.3s ease;
+}
+
+.baby-eye.left { left: 20px; }
+.baby-eye.right { right: 20px; }
+
+.baby-mouth {
+    width: 25px;
+    height: 2px;
+    background: #c77a7a;
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.baby-body-shape {
+    width: 70px;
+    height: 50px;
+    background: #ffc0d9; /* Color del pijama */
+    position: relative;
+    top: -10px; /* Solapar con la cabeza */
+    margin: 0 auto;
+    border-radius: 20px 20px 0 0;
+}
+
+/* Estados de felicidad */
+.happy-1 .baby-mouth {
+    height: 10px;
+    border-radius: 0 0 10px 10px;
+    bottom: 18px;
+}
+
+.happy-2 .baby-mouth {
+    width: 30px;
+    height: 15px;
+    border-radius: 0 0 15px 15px;
+    bottom: 15px;
+}
+
+.happy-3 .baby-eye {
+    height: 10px; /* Ojos más grandes */
+}
+
+.happy-3 .baby-mouth {
+    width: 35px;
+    height: 18px;
+    border-radius: 0 0 18px 18px;
+    bottom: 12px;
+}
