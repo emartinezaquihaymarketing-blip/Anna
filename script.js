@@ -17,13 +17,18 @@ document.addEventListener('DOMContentLoaded', function() {
     async function fetchMessageCount() {
         try {
             const response = await fetch(GOOGLE_SHEET_CSV_URL);
-            if (!response.ok) return;
+            if (!response.ok) {
+                console.error('Error de red al intentar obtener los mensajes.');
+                return;
+            }
             const csvText = await response.text();
-            // Contar filas, restando 1 por la cabecera
-            const messageCount = csvText.split(/\r?\n/).length - 1;
-            updateBaby(messageCount > 0 ? messageCount : 0);
+            // Filtrar cualquier fila en blanco para un conteo más preciso
+            const rows = csvText.split(/\r?\n/).filter(row => row.trim() !== '');
+            // El conteo es el número de filas menos la cabecera. Si solo hay cabecera, el conteo es 0.
+            const messageCount = rows.length > 1 ? rows.length - 1 : 0;
+            updateBaby(messageCount);
         } catch (error) {
-            console.error('Error al cargar los mensajes:', error);
+            console.error('Error al cargar o procesar los mensajes:', error);
         }
     }
 
@@ -55,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.addEventListener('touchmove', onDrag, { passive: false });
         document.addEventListener('mouseup', stopDrag);
         document.addEventListener('touchend', stopDrag);
-        e.preventDefault();
+        if (e.type === 'touchmove') e.preventDefault();
     }
 
     function onDrag(e) {
@@ -65,7 +70,6 @@ document.addEventListener('DOMContentLoaded', function() {
         let newX = clientX - offsetX;
         let newY = clientY - offsetY;
 
-        // Limitar el movimiento a la pantalla
         const maxX = window.innerWidth - interactiveBaby.offsetWidth;
         const maxY = window.innerHeight - interactiveBaby.offsetHeight;
         newX = Math.max(0, Math.min(newX, maxX));
@@ -73,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         interactiveBaby.style.left = `${newX}px`;
         interactiveBaby.style.top = `${newY}px`;
-        e.preventDefault();
+        if (e.type === 'touchmove') e.preventDefault();
     }
 
     function stopDrag() {
@@ -104,10 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => { window.open(WISHLIST_URL, '_blank'); }, 300);
     });
 
-    // --- OTRAS ANIMACIONES Y EFECTOS (código original) ---
-    // ... (el resto del código de animaciones como createConfetti, etc., va aquí)
-    const floatingElements = document.querySelectorAll('.element');
-
+    // --- OTRAS ANIMACIONES Y EFECTOS ---
     function createConfetti() {
         const colors = ['#ff69b4', '#ff1493', '#dc143c', '#ffd1e8', '#ffb3d9'];
         for (let i = 0; i < 50; i++) {
@@ -119,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // --- INICIALIZACIÓN ---
-    fetchMessageCount(); // Carga el número de mensajes al iniciar
+    fetchMessageCount();
 
 });
 

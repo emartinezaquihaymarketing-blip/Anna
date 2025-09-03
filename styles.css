@@ -754,8 +754,8 @@ ul.modal-text li::marker {
 
 #interactive-baby {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    top: 75%;
+    left: 80%;
     z-index: 990; /* Debajo de los modales (1000) pero encima de otros elementos */
     cursor: grab;
     user-select: none; /* Evita seleccionar texto al arrastrar */
@@ -784,6 +784,7 @@ ul.modal-text li::marker {
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     opacity: 0;
     transition: opacity 0.3s ease;
+    pointer-events: none; /* Para que no interfiera con el arrastre */
 }
 
 #interactive-baby:hover .speech-bubble {
