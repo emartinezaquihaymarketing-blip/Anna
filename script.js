@@ -22,8 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             const csvText = await response.text();
-            // Filtrar cualquier fila en blanco para un conteo más preciso
-            const rows = csvText.split(/\r?\n/).filter(row => row.trim() !== '');
+            // Filtrar cualquier fila en blanco o con solo comas para un conteo más preciso
+            const rows = csvText.split(/\r?\n/).filter(row => row.replace(/,/g, '').trim() !== '');
             // El conteo es el número de filas menos la cabecera. Si solo hay cabecera, el conteo es 0.
             const messageCount = rows.length > 1 ? rows.length - 1 : 0;
             updateBaby(messageCount);
