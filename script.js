@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     // --- CONSTANTES ---
-    const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSwohiRq4HO3c8B-i3zo1aCVOgNn6IeY5QKZAtufvV52dYm3oE8XJkvMbR2eZwn40s6vGpXGXTK9Iao/pub?gid=1974329891&single=true&output=csv';
+    const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSwohiRq4HO3c8B-i3zo1aCVOgNn6IeY5QKZAtufvV52dYm3oE8XJkvMbR2eZwn40s6vGpXGXTK9Iao/pub?output=csv';
     const WISHLIST_URL = 'https://www.hellobb.net/guest/W5rk';
 
     // --- ELEMENTOS DEL DOM ---
