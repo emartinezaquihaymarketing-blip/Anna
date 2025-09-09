@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const DATE_COLUMN_INDEX = 2; // La columna de la fecha en el CSV (0=Timestamp, 1=Nombre, 2=Fecha)
 
     // --- ELEMENTOS DEL DOM ---
-    const novemberCalendar = document.getElementById('november-calendar');
+    
     const decemberCalendar = document.getElementById('december-calendar');
     const modal = document.getElementById('message-modal');
     const closeModalBtn = document.querySelector('.modal-close-btn');
@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- INICIALIZACIÓN ---
     function init() {
-        generateCalendar(2025, 11, novemberCalendar);
+        
         generateCalendar(2025, 12, decemberCalendar);
         setupCalendarListeners();
         fetchAndDisplayVotes();
