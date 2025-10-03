@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- INICIALIZACIÓN ---
     function init() {
-        
+        generateCalendar(2025, 11, novemberCalendar);
         generateCalendar(2025, 12, decemberCalendar);
         setupCalendarListeners();
         fetchAndDisplayVotes();
