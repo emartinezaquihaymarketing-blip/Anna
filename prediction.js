@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const DATE_COLUMN_INDEX = 2; // La columna de la fecha en el CSV (0=Timestamp, 1=Nombre, 2=Fecha)
 
     // --- ELEMENTOS DEL DOM ---
-    
     const novemberCalendar = document.getElementById('november-calendar');
     const decemberCalendar = document.getElementById('december-calendar');
     const modal = document.getElementById('message-modal');
@@ -19,9 +18,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let selectedDate = '';
 
-    function generateNovemberCalendar(year, month, container) {
-        const monthIndex = month - 1;
+    const monthNames = [
+        'Enero','Febrero','Marzo','Abril','Mayo','Junio',
+        'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'
+    ];
+
+    /** ---------------------------
+     * SOLO última semana de noviembre (24–30),
+     * alineada con la cuadrícula Lu–Do
+     * --------------------------- */
+    function generateLastWeekOfNovember(year, container) {
+        const monthIndex = 10; // 0=Ene ... 10=Nov
         const weekDays = ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá', 'Do'];
+
+        // Cabecera días de la semana
         weekDays.forEach(day => {
             const dayNameEl = document.createElement('div');
             dayNameEl.className = 'calendar-day-name';
@@ -29,19 +39,26 @@ document.addEventListener('DOMContentLoaded', () => {
             container.appendChild(dayNameEl);
         });
 
-        // Last week of November 2025 starts on Monday 24th
+        // Día de la semana del 24 (0=Dom,1=Lun,...). Offset para cuadrícula que empieza en lunes
+        const dow24 = new Date(year, monthIndex, 24).getDay();
+        const offset = (dow24 === 0) ? 6 : dow24 - 1;
+
+        // Huecos hasta colocar el 24 en su columna
+        for (let i = 0; i < offset; i++) {
+            container.appendChild(document.createElement('div'));
+        }
+
+        // Días 24..30 de noviembre
         for (let day = 24; day <= 30; day++) {
             const dayEl = document.createElement('div');
             dayEl.className = 'calendar-day';
             dayEl.innerHTML = `<span class="day-number">${day}</span>`;
-            dayEl.dataset.date = `${day} de Noviembre de ${year}`;
+            dayEl.dataset.date = `${day} de Noviembre de ${year}`; // mismo formato que lees del CSV
             container.appendChild(dayEl);
         }
     }
 
-    /**
-     * Genera un calendario para un mes y año específicos.
-     */
+    /** Genera un calendario completo para mes/año (para DICIEMBRE) */
     function generateCalendar(year, month, container) {
         const monthIndex = month - 1;
         const daysInMonth = new Date(year, month, 0).getDate();
@@ -64,14 +81,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const dayEl = document.createElement('div');
             dayEl.className = 'calendar-day';
             dayEl.innerHTML = `<span class="day-number">${day}</span>`;
-            dayEl.dataset.date = `${day} de ${container.previousElementSibling.textContent.split(' ')[0]} de ${year}`;
+            // Usamos monthNames para no depender del texto del <h2>
+            dayEl.dataset.date = `${day} de ${monthNames[monthIndex]} de ${year}`;
             container.appendChild(dayEl);
         }
     }
 
-    /**
-     * Procesa los datos del CSV para contar votos por fecha.
-     */
+    /** Procesa los datos del CSV para contar votos por fecha */
     function processVoteData(csvText) {
         const voteCounts = {};
         let totalVotes = 0;
@@ -79,6 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Empezar desde 1 para saltar la fila de cabecera
         for (let i = 1; i < rows.length; i++) {
+            if (!rows[i]) continue;
             const cells = rows[i].split(',');
             if (cells.length > DATE_COLUMN_INDEX) {
                 const date = cells[DATE_COLUMN_INDEX].trim();
@@ -91,9 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return { voteCounts, totalVotes };
     }
 
-    /**
-     * Muestra los votos visualmente en el calendario.
-     */
+    /** Muestra los votos visualmente en el calendario */
     function displayVoteVisuals(voteCounts, totalVotes) {
         if (totalVotes === 0) return;
 
@@ -101,15 +116,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const date = dayEl.dataset.date;
             if (voteCounts[date]) {
                 const percentage = Math.round((voteCounts[date] / totalVotes) * 100);
-                // Aplicar el estilo de fondo para el efecto de llenado
                 dayEl.style.background = `linear-gradient(to top, #ffc0d9 ${percentage}%, #fff ${percentage}%)`;
             }
         });
     }
 
-    /**
-     * Obtiene los datos de votación y actualiza la UI.
-     */
+    /** Obtiene los datos de votación y actualiza la UI */
     async function fetchAndDisplayVotes() {
         try {
             const response = await fetch(GOOGLE_SHEET_CSV_URL);
@@ -124,9 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    /**
-     * Configura los event listeners para los días del calendario.
-     */
+    /** Configura los event listeners para los días del calendario */
     function setupCalendarListeners() {
         document.querySelectorAll('.calendar-day[data-date]').forEach(day => {
             day.addEventListener('click', () => {
@@ -142,14 +152,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Lógica del Modal y Formulario ---
-    function closeModal() {
-        modal.style.display = 'none';
-    }
+    function closeModal() { modal.style.display = 'none'; }
 
     closeModalBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
-    });
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
     predictionForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -182,8 +188,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- INICIALIZACIÓN ---
     function init() {
-        generateCalendar(2025, 11, novemberCalendar);
+        // NOVIEMBRE: solo la última semana (24–30)
+        generateLastWeekOfNovember(2025, novemberCalendar);
+
+        // DICIEMBRE: mes completo
         generateCalendar(2025, 12, decemberCalendar);
+
         setupCalendarListeners();
         fetchAndDisplayVotes();
     }
