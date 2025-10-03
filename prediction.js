@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- ELEMENTOS DEL DOM ---
     
+    const novemberCalendar = document.getElementById('november-calendar');
     const decemberCalendar = document.getElementById('december-calendar');
     const modal = document.getElementById('message-modal');
     const closeModalBtn = document.querySelector('.modal-close-btn');
