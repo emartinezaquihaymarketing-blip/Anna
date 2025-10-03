@@ -18,6 +18,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let selectedDate = '';
 
+    function generateNovemberCalendar(year, month, container) {
+        const monthIndex = month - 1;
+        const weekDays = ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá', 'Do'];
+        weekDays.forEach(day => {
+            const dayNameEl = document.createElement('div');
+            dayNameEl.className = 'calendar-day-name';
+            dayNameEl.textContent = day;
+            container.appendChild(dayNameEl);
+        });
+
+        // Last week of November 2025 starts on Monday 24th
+        for (let day = 24; day <= 30; day++) {
+            const dayEl = document.createElement('div');
+            dayEl.className = 'calendar-day';
+            dayEl.innerHTML = `<span class="day-number">${day}</span>`;
+            dayEl.dataset.date = `${day} de Noviembre de ${year}`;
+            container.appendChild(dayEl);
+        }
+    }
+
     /**
      * Genera un calendario para un mes y año específicos.
      */
