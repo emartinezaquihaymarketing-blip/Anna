@@ -881,3 +881,158 @@ ul.modal-text li::marker {
     border-radius: 0 0 18px 18px;
     bottom: 12px;
 }
+
+/* ===== SANTORAL – tarjeta bonita con glassmorphism ===== */
+.saints-table-container{
+    max-width: 820px;
+    margin: 2.5rem auto 0;
+    padding: 1.5rem 1.25rem 1.25rem;
+    border-radius: 24px;
+    background: rgba(255,255,255,0.55);
+    border: 2px solid #ffd1e8;
+    box-shadow: 0 18px 45px rgba(214, 51, 132, 0.22);
+    backdrop-filter: blur(6px);
+    position: relative;
+    overflow: hidden;
+}
+
+/* burbujas decorativas suaves */
+.saints-table-container::before,
+.saints-table-container::after{
+    content:"";
+    position:absolute;
+    width:220px; height:220px;
+    border-radius:50%;
+    filter: blur(30px);
+    opacity:.25;
+    z-index:0;
+}
+.saints-table-container::before{
+    top:-80px; left:-60px;
+    background: radial-gradient(circle at 30% 30%, #ff69b4, #ff9dd1);
+}
+.saints-table-container::after{
+    bottom:-90px; right:-70px;
+    background: radial-gradient(circle at 70% 70%, #8e44ad, #d63384);
+}
+
+/* título del bloque (ya usas .calendar-title) */
+.saints-table-container .calendar-title{
+    position: relative;
+    z-index: 1;
+    margin-bottom: 1rem;
+}
+
+/* tabla */
+.saints-table{
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1; /* por encima de las burbujas */
+    background: #fff;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+}
+
+/* cabecera */
+.saints-table thead th{
+    padding: 14px 18px;
+    text-align: left;
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    background: linear-gradient(45deg, #ff69b4, #ff1493, #dc143c);
+}
+
+/* celdas */
+.saints-table td{
+    padding: 14px 18px;
+    border-bottom: 1px solid #f5d0e5;
+    background: #fff;
+}
+
+/* zebra */
+.saints-table tbody tr:nth-child(even) td{
+    background: rgba(255,105,180,0.05);
+}
+
+/* hover resalta la fila */
+.saints-table tbody tr{
+    transition: transform .12s ease, background .12s ease, box-shadow .12s ease;
+}
+.saints-table tbody tr:hover{
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(214,51,132,0.12);
+}
+.saints-table tbody tr:hover td{
+    background: linear-gradient(0deg, rgba(255,221,237,0.6), rgba(255,255,255,1));
+}
+
+/* primera y última fila redondeadas */
+.saints-table tbody tr:first-child td:first-child{ border-top-left-radius: 12px; }
+.saints-table tbody tr:first-child td:last-child{  border-top-right-radius: 12px; }
+.saints-table tbody tr:last-child  td:first-child{ border-bottom-left-radius: 12px; }
+.saints-table tbody tr:last-child  td:last-child{  border-bottom-right-radius: 12px; }
+
+/* estiliza columnas: día y santo */
+.saints-table tbody td:first-child{
+    font-weight: 700;
+    color: #8e44ad;
+    white-space: nowrap;
+}
+.saints-table tbody td:first-child::before{
+    content: "📅";
+    margin-right: 8px;
+    filter: saturate(1.1);
+}
+.saints-table tbody td:last-child{
+    color: #d63384;
+    font-weight: 600;
+}
+.saints-table tbody td:last-child::before{
+    content: "✨ ";
+    opacity: .8;
+}
+
+/* mini “badge” opcional detrás del nombre del santo (sutil brillo) */
+.saints-table tbody td:last-child{
+    position: relative;
+}
+.saints-table tbody td:last-child::after{
+    content:"";
+    position:absolute;
+    inset: 6px 10px;
+    border-radius: 10px;
+    background: radial-gradient(120px 40px at 0% 50%, rgba(255,157,209,.18), transparent 60%);
+    pointer-events: none;
+}
+
+/* responsive: convierte en tarjetas en móviles */
+@media (max-width: 560px){
+    .saints-table thead{ display:none; }
+    .saints-table, .saints-table tbody, .saints-table tr, .saints-table td{
+        display:block; width:100%;
+    }
+    .saints-table tbody tr{
+        background:#fff;
+        border:1px solid #ffd1e8;
+        border-radius:14px;
+        padding:10px 12px;
+        margin-bottom:12px;
+        box-shadow: 0 8px 18px rgba(214,51,132,0.12);
+    }
+    .saints-table tbody td{
+        border:none;
+        padding:8px 2px;
+    }
+    .saints-table tbody td:first-child{
+        font-size:1rem;
+        margin-bottom:4px;
+    }
+    .saints-table tbody td:last-child{
+        font-size:1.05rem;
+    }
+}
